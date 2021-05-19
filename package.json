@@ -1,0 +1,24 @@
+{
+  "name": "lighthouse-runner",
+  "version": "0.1",
+  "main": "index.js",
+  "author": "Alexander Kucheryuk <alexander.kucheryuk@notesco.com>",
+  "license": "MIT",
+  "scripts": {
+    "chrome": "node ./index.js -v 7.2.0",
+    "chrome@mobile": "node ./index.js -v 7.2.0 -m",
+    "psi": "node ./index.js -v 7.3.0",
+    "psi@mobile": "node ./index.js -v 7.3.0 -m",
+    "next": "node ./index.js -v 7.5.0",
+    "next@mobile": "node ./index.js -v 7.5.0 -m",
+    "custom": "node ./index.js"
+  },
+  "devDependencies": {
+    "7.2.0": "npm:lighthouse@7.2.0",
+    "7.3.0": "npm:lighthouse@7.3.0",
+    "7.5.0": "npm:lighthouse@7.5.0",
+    "chrome-launcher": "^0.14.0",
+    "minimist": "^1.2.5",
+    "ora": "^5.4.0"
+  }
+}
