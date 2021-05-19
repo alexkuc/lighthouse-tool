@@ -15,7 +15,7 @@ module.exports.reportVersion = (version) => {
 
 // not all characters are allowed in the file name
 // so remove unsupported ones
-module.exports.reportName = (websiteName) => {
+module.exports.reportName = (websiteName, child) => {
   let reportName = websiteName;
 
   // remove trailing slash
@@ -34,6 +34,10 @@ module.exports.reportName = (websiteName) => {
   // add .html extension if missing
   if (!new RegExp(/.html$/).test(reportName)) {
     reportName += '.html';
+  }
+
+  if (child) {
+    reportName = reportName.replace('.html', `-${child}.json`);
   }
 
   return reportName;

@@ -48,6 +48,7 @@ These are the available parameters:
 | `-m`, `--mobile`    | use mobile config, by default desktop config is used         |
 | `-v`, `--version`   | specifies Lighthouse version, by default `7.2.0` is used     |
 | `-f`, `--force`     | overwrite report if one exists in the destination path       |
+| `-r`, `--repeat`    | how many times to repeat the report, by default 1            |
 
 \* are the required parameters
 
