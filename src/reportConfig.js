@@ -2,20 +2,56 @@
 
 const fs = require('fs');
 const path = require('path');
+const args = require('./args');
 const process = require('process');
 
-module.exports.reportVersion = (version) => {
+const report = {
+  get website() {
+    return args.website;
+  },
+  get name() {
+    return sanitizeName(args.name ?? args.website, args.child ?? undefined);
+  },
+  get directory() {
+    return args.directory;
+  },
+  get device() {
+    return args.mobile ? 'mobile' : 'desktop';
+  },
+  get version() {
+    return validateVersion(args.version ?? '7.2.0');
+  },
+  get path() {
+    return resolvePath(this.name, this.directory);
+  },
+  get repeat() {
+    return args.repeat ?? 1;
+  },
+  getChildArgs: function (i) {
+    let str = '';
+    str += `--website "${this.website}"`;
+    str += ` --name "${this.name}"`;
+    str += ` --version "${this.version}"`;
+    str += args.directory ? ` --directory "${args.directory}"` : '';
+    str += args.mobile ? ' --mobile' : '';
+    str += args.force ? ' --force' : '';
+    str += ` --child ${i}`;
+    return str;
+  },
+};
+
+function validateVersion(version) {
   try {
     require.resolve(version);
   } catch (error) {
     throw 'The specified version of the Lighthouse does not exist!';
   }
   return version;
-};
+}
 
 // not all characters are allowed in the file name
 // so remove unsupported ones
-module.exports.reportName = (websiteName, child) => {
+function sanitizeName(websiteName, child) {
   let reportName = websiteName;
 
   // remove trailing slash
@@ -29,7 +65,7 @@ module.exports.reportName = (websiteName, child) => {
   // remove port
   reportName = reportName.replace(/(:[\d]+)$/, '');
 
-  reportName = module.exports.illegalChars(reportName);
+  reportName = sanitizeInvalidChars(reportName);
 
   // add .html extension if missing
   if (!new RegExp(/.html$/).test(reportName)) {
@@ -41,13 +77,13 @@ module.exports.reportName = (websiteName, child) => {
   }
 
   return reportName;
-};
+}
 
-module.exports.reportPath = (reportName, folderName) => {
-  const reportSafeName = module.exports.reportName(reportName);
+function resolvePath(reportName, folderName) {
+  const reportSafeName = sanitizeName(reportName);
 
   if (folderName) {
-    const folderSafeName = module.exports.illegalChars(folderName);
+    const folderSafeName = sanitizeInvalidChars(folderName);
     const folderPath = path.resolve(process.cwd(), folderSafeName);
 
     if (!fs.existsSync(folderPath)) {
@@ -58,10 +94,12 @@ module.exports.reportPath = (reportName, folderName) => {
   }
 
   return path.resolve(process.cwd(), reportSafeName);
-};
+}
 
 // replace illegal characters with dash
 // https://stackoverflow.com/a/42210346/4343719
-module.exports.illegalChars = (input) => {
+function sanitizeInvalidChars(input) {
   return input.replace(/[/\\?%*:|"<>]/g, '-');
-};
+}
+
+module.exports = report;

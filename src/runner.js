@@ -3,7 +3,7 @@
 const fs = require('fs');
 const args = require('./args');
 const process = require('process');
-const configMaker = require('./lhConfig');
+const deviceConfig = require('./deviceConfig');
 const chromeLauncher = require('chrome-launcher');
 
 module.exports = async (report) => {
@@ -22,7 +22,7 @@ module.exports = async (report) => {
     runnerResult = await lighthouse(
       report.website,
       options,
-      configMaker(report.device, report.version)
+      deviceConfig(report.device, report.version)
     );
   } catch (err) {
     await chrome.kill();

@@ -1,46 +1,11 @@
 'use strict';
 
 const fs = require('fs');
-const runner = require('./src/runner');
-const { execSync } = require('child_process');
-const { reportName, reportPath, reportVersion } = require('./src/lhReport');
-const args = require('./src/args');
 const path = require('path');
-
-const report = {
-  get website() {
-    return args.website;
-  },
-  get name() {
-    return reportName(args.name ?? args.website, args.child ?? undefined);
-  },
-  get directory() {
-    return args.directory;
-  },
-  get device() {
-    return args.mobile ? 'mobile' : 'desktop';
-  },
-  get version() {
-    return reportVersion(args.version ?? '7.2.0');
-  },
-  get path() {
-    return reportPath(this.name, this.directory);
-  },
-  get repeat() {
-    return args.repeat ?? 1;
-  },
-  getChildArgs: function (i) {
-    let str = '';
-    str += `--website "${this.website}"`;
-    str += ` --name "${this.name}"`;
-    str += ` --version "${this.version}"`;
-    str += args.directory ? ` --directory "${args.directory}"` : '';
-    str += args.mobile ? ' --mobile' : '';
-    str += args.force ? ' --force' : '';
-    str += ` --child ${i}`;
-    return str;
-  },
-};
+const args = require('./src/args');
+const runner = require('./src/runner');
+const report = require('./src/reportConfig');
+const { execSync } = require('child_process');
 
 // child process _cannot_ start w/o passing validation
 // b/c parent has to pass validation first!
