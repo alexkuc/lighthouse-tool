@@ -14,25 +14,6 @@ if (args.child) {
   return;
 }
 
-if (!report.website) {
-  console.error('Specify website name via -w (or --website) argument!');
-  process.exit(1);
-}
-
-if (!new RegExp(/^http[s]?:[\/]{2}/).test(report.website)) {
-  console.error('Your url must start with http[s]://<website>!');
-  console.error(
-    `For example, http://${report.website}, instead of just ${report.website}`
-  );
-  process.exit(1);
-}
-
-if (fs.existsSync(report.path) && !args.force) {
-  console.error('You already have a report at this path!');
-  console.error(report.path);
-  process.exit(1);
-}
-
 if (report.repeat === 1) {
   runner(report);
   return;
