@@ -38,6 +38,17 @@ const report = {
     str += ` --child ${i}`;
     return str;
   },
+  convertJsonToHtml: function (json) {
+    const lhPath = path.dirname(require.resolve(this.version));
+    const { generateReportHtml } = require(lhPath +
+      '/report/report-generator.js');
+    return generateReportHtml(json);
+  },
+  generateMedianReport: function (jsonArr) {
+    const lhPath = path.dirname(require.resolve(this.version));
+    const { computeMedianRun } = require(lhPath + '/lib/median-run.js');
+    return computeMedianRun(jsonArr);
+  },
 };
 
 function validateVersion(version) {
