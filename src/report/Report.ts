@@ -21,7 +21,9 @@ class Report {
     this.force = rawArgs.force ?? false;
 
     if (this.path && !fs.existsSync(this.path)) {
-      fs.mkdirSync(this.path);
+      fs.mkdirSync(this.path, {
+        recursive: true,
+      });
     }
   }
 
