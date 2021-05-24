@@ -1,24 +1,28 @@
 {
   "name": "lighthouse-runner",
   "version": "0.1",
-  "main": "index.js",
+  "main": "dist/index.js",
   "author": "Alexander Kucheryuk <alexander.kucheryuk@notesco.com>",
   "license": "MIT",
   "scripts": {
-    "chrome": "node ./index.js -v 7.2.0",
-    "chrome@mobile": "node ./index.js -v 7.2.0 -m",
-    "psi": "node ./index.js -v 7.3.0",
-    "psi@mobile": "node ./index.js -v 7.3.0 -m",
-    "next": "node ./index.js -v 7.5.0",
-    "next@mobile": "node ./index.js -v 7.5.0 -m",
-    "custom": "node ./index.js"
+    "build": "rm -fr dist/ && yarn tsc",
+    "watch": "rm -fr dist/ && yarn tsc --watch",
+    "chrome": "node dist/index.js -v 7.2",
+    "chrome@m": "node dist/index.js -v 7.2 -m",
+    "psi": "node dist/index.js -v 7.3",
+    "psi@m": "node dist/index.js -v 7.3 -m",
+    "next": "node dist/index.js -v 7.5",
+    "next@m": "node dist/index.js -v 7.5 -m",
+    "custom": "node dist/index.js"
   },
   "devDependencies": {
-    "7.2.0": "npm:lighthouse@7.2.0",
-    "7.3.0": "npm:lighthouse@7.3.0",
-    "7.5.0": "npm:lighthouse@7.5.0",
+    "7.2": "npm:lighthouse@7.2.0",
+    "7.3": "npm:lighthouse@7.3.0",
+    "7.5": "npm:lighthouse@7.5.0",
+    "@types/minimist": "^1.2.1",
+    "@types/node": "^15.6.0",
     "chrome-launcher": "^0.14.0",
     "minimist": "^1.2.5",
-    "ora": "^5.4.0"
+    "typescript": "^4.2.4"
   }
 }

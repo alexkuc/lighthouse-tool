@@ -10,6 +10,7 @@ This is a simple Node-based tool to generate Lighthouse reports. Why? First, scr
 
 - git clone
 - yarn install
+- yarn build
 
 ### Usage
 
@@ -23,14 +24,14 @@ Don't forget to prefix website's name with `http://` or `https://`!
 
 There 6 predefined presets:
 
-| preset          | device    | version\* |
-| --------------- | --------- | --------- |
-| `chrome`        | `desktop` | `7.2.0`   |
-| `chrome@mobile` | `mobile`  | `7.2.0`   |
-| `psi`           | `desktop` | `7.3.0`   |
-| `psi@mobile`    | `mobile`  | `7.3.0`   |
-| `next`          | `desktop` | `7.5.0`   |
-| `next@mobile`   | `mobile`  | `7.5.0`   |
+| preset     | device    | version\* |
+| ---------- | --------- | --------- |
+| `chrome`   | `desktop` | `7.2.0`   |
+| `chrome@m` | `mobile`  | `7.2.0`   |
+| `psi`      | `desktop` | `7.3.0`   |
+| `psi@m`    | `mobile`  | `7.3.0`   |
+| `next`     | `desktop` | `7.5.0`   |
+| `next@m`   | `mobile`  | `7.5.0`   |
 
 \* refers to [Lighthouse version](https://github.com/GoogleChrome/lighthouse/releases)
 
@@ -40,15 +41,17 @@ There 6 predefined presets:
 
 These are the available parameters:
 
-| parameter           | description                                                  |
-| ------------------- | ------------------------------------------------------------ |
-| `-w`, `--website`   | website to test (requires `http://` or `https://` prefix) \* |
-| `-n`, `--name`      | report name (adding `.html` is not necessary)                |
-| `-d`, `--directory` | directory where to save report, resolved relative to `pwd`   |
-| `-m`, `--mobile`    | use mobile config, by default desktop config is used         |
-| `-v`, `--version`   | specifies Lighthouse version, by default `7.2.0` is used     |
-| `-f`, `--force`     | overwrite report if one exists in the destination path       |
-| `-r`, `--repeat`    | how many times to repeat the report, by default 1            |
+| parameter         | description                                                  |
+| ----------------- | ------------------------------------------------------------ |
+| `-w`, `--website` | website to test (requires `http://` or `https://` prefix) \* |
+| `-n`, `--name`    | report name (do NOT add filename extension!)                 |
+| `-p`, `--path`    | path to which report(s) will be saved                        |
+| `-m`, `--mobile`  | use mobile config, by default desktop config is used         |
+| `-v`, `--version` | specifies Lighthouse version, by default `7.2.0` is used     |
+| `-f`, `--force`   | overwrite report if one exists in the destination path       |
+| `-h`, `--html`    | save report(s) to HTML format                                |
+| `-j`, `--json`    | save report(s) to JSON format                                |
+| `-r`, `--repeat`  | how many times to repeat the report, by default 1            |
 
 \* are the required parameters
 
