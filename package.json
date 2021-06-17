@@ -19,6 +19,7 @@
     "7.2": "npm:lighthouse@7.2.0",
     "7.3": "npm:lighthouse@7.3.0",
     "7.5": "npm:lighthouse@7.5.0",
+    "8.0": "npm:lighthouse@8.0.0",
     "@types/minimist": "^1.2.1",
     "@types/node": "^15.6.0",
     "chrome-launcher": "^0.14.0",
