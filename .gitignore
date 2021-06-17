@@ -7,5 +7,6 @@
 .pnp.*
 *.html
 *.json
+!tsconfig.json
 dist/
 .vscode/
