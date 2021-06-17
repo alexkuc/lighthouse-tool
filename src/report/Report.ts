@@ -7,7 +7,7 @@ class Report {
   basename: string;
   path: string;
   device: string;
-  version: '7.2' | '7.3' | '7.5';
+  version: '7.2' | '7.3' | '7.5' | '8.0';
 
   constructor(rawArgs: any) {
     this.validateReportProps(rawArgs);
@@ -46,7 +46,7 @@ class Report {
       throw new Error('Specify Lighthouse version via -v parameter!');
     }
 
-    if (!new RegExp(/^7\.[235]$/).test(rawArgs.version)) {
+    if (!new RegExp(/^[78]\.[0235]$/).test(rawArgs.version)) {
       throw new Error('Unsupported Lighthouse version is used!');
     }
   }
