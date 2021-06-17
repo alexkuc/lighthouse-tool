@@ -18,7 +18,9 @@ const argOpts = {
 const args = minimist(process.argv.slice(2), argOpts);
 
 args.repeat = args.repeat ?? 1;
-args.version = args.version.toString();
+// it appears that minimist converts float into integer
+// e.g. passing '8.0' becomes '8'
+args.version = parseFloat(args.version).toFixed(1).toString();
 
 validatge(args);
 
